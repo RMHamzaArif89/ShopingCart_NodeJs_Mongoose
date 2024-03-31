@@ -1,5 +1,10 @@
 const express=require('express')
-const app=require('app')
+const app=express()
+const path=require('path')
+const bodyParser=require('body-parser')
+const formRoute=require('./routes/form')
+
+const game=require('./model/form')
 
 
 //require the mongoose connection
@@ -20,14 +25,16 @@ app.set('view engine','ejs')
 app.set('views','views')
 
 
-
-app.get('/form',(req,res)=>{
-    res.render('form')
-
-})
+//formRoute
+app.use(formRoute)
 
 
 
-app.listen(8000,()=>{
+
+
+
+
+
+app.listen(5000,()=>{
     console.log('port is listening')
 })
