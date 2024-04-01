@@ -1,12 +1,14 @@
 const express=require('express')
 const app=express()
-const mongoose=requir('mongoose')
+const mongoose=require('mongoose')
 const path=require('path')
 const bodyParser=require('body-parser')
 var cookieParser = require('cookie-parser')
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo');
 const formRoute=require('./routes/form')
+const Cart=require('./model/cart')
+const cards=require('./model/form')
 
 const game=require('./model/form')
 
@@ -29,9 +31,9 @@ app.use(express.static('upload'))
 //store the session
 app.use(session({
     secret:'rmhamzaarif89',
+    store: MongoStore.create({mongoUrl:'mongodb://127.0.0.1:27017/CartGames'}),
     resave:false,
     saveUninitialized:false,
-    store: new MongoStore({mongooseConnection: mongoose.connection}),
     cookie:{maxAge:180 * 60 * 1000}
 }))
 app.use((req,res,next)=>{
@@ -48,9 +50,15 @@ app.set('views','views')
 app.use(formRoute)
 
 
-app.get('/add-to-cart/:id',(req,res)=>{
-    let id=req.params._id
-    
+app.get('/add-to-cart/:id',async(req,res,next)=>{
+    let _id=req.params.id
+    var cart= new Cart(req.session.cart? req.session.cart:{items:{}})
+   let card= await cards.findById({_id})
+   
+cart.add(card,card._id)
+req.session.cart=cart;
+console.log(req.session.cart)
+res.send(card)
 })
 
 

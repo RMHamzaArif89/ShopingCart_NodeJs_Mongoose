@@ -12,6 +12,7 @@ router.use(express.json())
 //require the games cart Schema
 
 const game=require('../model/form')
+const Cart=require('../model/cart')
 
 router.get('/form',(req,res)=>{
     res.render('form',{title:'Form|Page'})
@@ -54,6 +55,7 @@ router.post('/postForm',upload.single('img'),async(req,res)=>{
 
 router.get('/home',async(req,res)=>{
     const Data=await game.find({})
+    
     res.render('home',{title:'Home|Page',Data})
 })
 
