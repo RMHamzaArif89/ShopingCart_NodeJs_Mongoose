@@ -65,6 +65,17 @@ res.send(card)
 
 
 
+
+app.get('/ShopingCart',(req,res)=>{
+    let cart= new Cart(req.session.cart)
+    console.log(cart.generateArray())
+    // res.render('ShopingCart')
+    res.send('okay')
+})
+
+
+
+
 app.listen(5000,()=>{
     console.log('port is listening')
 })

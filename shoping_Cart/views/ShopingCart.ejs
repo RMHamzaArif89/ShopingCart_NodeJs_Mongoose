@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoping Cart</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 100%;
+            height: calc(100vh - 57px);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background: linear-gradient(180deg,lightblue,skyblue);
+        }
+        .row{
+            width: 80%;
+            height: 180px;
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        div.total-row{
+            width: 80%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            background: lightcoral;
+            color: white;
+            font-weight: bolder;
+            font-family: serif;
+        }
+        .total-items,.total-price{
+            font-size: 2.5rem;
+            color: red;
+            font-family: serif;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+  <%session.cart.forEach((val)=>{%>
+    <div class="item"><%=val.qty%></div>
+
+ <% })%>
+   <div class="total-row">
+    <div class="total-items">TotalItems:<%=session.cart.totalQty%></div>
+    <div class="total-price">TotalPrice:<%=session.cart.totalPrice%></div>
+
+   </div>
+
+    </div>
+</body>
+</html>
