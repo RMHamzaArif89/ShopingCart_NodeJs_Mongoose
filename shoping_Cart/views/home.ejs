@@ -57,19 +57,23 @@
 </h1>
 <div class="container">
     <div class="card-row">
+<%if(Data.length>0){%>
     <%Data.forEach((val)=>{%>
         
-            <div class="card">
-                <img src="<%=val.img%>" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title"><%=val.name%></h5>
-                  <p class="card-text text-danger"><%=val.price%>$</p>
-                  <a href="/add-to-cart/<%=val._id%>" class="btn btn-primary">Add To Cart</a>
-                </div>
-              </div>
-        
+        <div class="card">
+            <img src="<%=val.img%>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%=val.name%></h5>
+              <p class="card-text text-danger"><%=val.price%>$</p>
+              <a href="/add-to-cart/<%=val._id%>" class="btn btn-primary">Add To Cart</a>
+            </div>
+          </div>
+    
 
-    <%})%>
+<%})%>
+<%} else{%>
+<h1>no data found</h1>
+    <%}%>
 </div>
 </div>
     

@@ -66,10 +66,21 @@ res.redirect('/ShopingCart')
 
 
 app.get('/ShopingCart',(req,res)=>{
-    let cart= new Cart(req.session.cart)
+    let cart= new Cart(req.session.cart);
     // console.log(cart.generateArray())
  res.render('ShopingCart',{cart:cart.generateArray()})
     
+})
+
+
+
+//reduce the cart item quanity
+app.get('/reduce/:id',(req,res)=>{
+    let _id=req.params.id
+    let cart= new Cart(req.session.cart ? req.session.cart : {});
+    cart.reduceOne(_id)
+    req.session.cart=cart;
+    res.redirect('/ShopingCart')
 })
 
 

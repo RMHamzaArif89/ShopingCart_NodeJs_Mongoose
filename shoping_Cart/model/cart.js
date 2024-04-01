@@ -1,5 +1,5 @@
 module.exports=function Cart(oldCart){
-    this.items=oldCart.items || {};
+    this.items=oldCart.items || [];
     this.totalQty=oldCart.totalQty || 0;
     this.totalPrice=oldCart.totalPrice || 0;
 
@@ -13,6 +13,16 @@ module.exports=function Cart(oldCart){
         storedItem.price=storedItem.item.price*storedItem.qty;
         this.totalQty++;
         this.totalPrice+=storedItem.item.price;
+
+    }
+    this.reduceOne=(id)=>{
+    this.items[id].qty--;
+    this.items[id].price-=this.items[id].item.price;
+    this.totalQty--;
+    this.totalPrice -=this.items[id].item.price;
+    if(this.items[id].qty<=0){
+        delete this.items[id]
+    }
 
     }
     this.generateArray=function(){
