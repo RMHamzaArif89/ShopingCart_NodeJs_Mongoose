@@ -57,8 +57,7 @@ app.get('/add-to-cart/:id',async(req,res,next)=>{
    
 cart.add(card,card._id)
 req.session.cart=cart;
-console.log(req.session.cart)
-res.send(card)
+res.redirect('/ShopingCart')
 })
 
 
@@ -68,9 +67,9 @@ res.send(card)
 
 app.get('/ShopingCart',(req,res)=>{
     let cart= new Cart(req.session.cart)
-    console.log(cart.generateArray())
-    // res.render('ShopingCart')
-    res.send('okay')
+    // console.log(cart.generateArray())
+ res.render('ShopingCart',{cart:cart.generateArray()})
+    
 })
 
 
